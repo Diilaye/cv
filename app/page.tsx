@@ -3,8 +3,8 @@ import { Eye, RotateCw, Save } from "lucide-react";
 import Image from "next/image";
 import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import { useEffect, useRef, useState } from "react";
-import { Education, Experience, Hobby, Language, PersonalDetails, Skill } from './data/donnes';
-import { educationsPreset, experiencesPreset, hobbiesPreset, languagesPreset, personalDetailsPreset, skillsPreset } from "@/presets";
+import { Education, Experience, Hobby, Language, PersonalDetails, Skill } from "./data/donnes";
+import { educationsPreset, experiencesPreset, hobbiesPreset, languagesPreset, personalDetailsPreset, skillsPreset } from "./data/present";
 import CVPreview from "./components/CVPreview";
 import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
@@ -18,7 +18,8 @@ import confetti from "canvas-confetti"
 export default function Home() {
   const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(personalDetailsPreset)
   const [file, setFile] = useState<File | null>(null)
-  const [zoom, setZoom] = useState<number>(170)
+  const [theme, setTheme] = useState<string>('sunset')
+  const [zoom, setZoom] = useState<number>(163)
   const [experiences, setExperience] = useState<Experience[]>(experiencesPreset)
   const [educations, setEducations] = useState<Education[]>(educationsPreset)
   const [languages, setLanguages] = useState<Language[]>(languagesPreset)
@@ -37,40 +38,40 @@ export default function Home() {
       })
   }, [])
 
-  // const themes = [
-  //   "light",
-  //   "dark",
-  //   "cupcake",
-  //   "bumblebee",
-  //   "emerald",
-  //   "corporate",
-  //   "synthwave",
-  //   "retro",
-  //   "cyberpunk",
-  //   "valentine",
-  //   "halloween",
-  //   "garden",
-  //   "forest",
-  //   "aqua",
-  //   "lofi",
-  //   "pastel",
-  //   "fantasy",
-  //   "wireframe",
-  //   "black",
-  //   "luxury",
-  //   "dracula",
-  //   "cmyk",
-  //   "autumn",
-  //   "business",
-  //   "acid",
-  //   "lemonade",
-  //   "night",
-  //   "coffee",
-  //   "winter",
-  //   "dim",
-  //   "nord",
-  //   "sunset",
-  // ]
+  const themes = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+    "dim",
+    "nord",
+    "sunset",
+  ]
 
   const handleResetPersonalDetails = () => setPersonalDetails(
     {
@@ -90,7 +91,7 @@ export default function Home() {
   const handleResetSkills = () => setSkills([])
   const handleResetHobbies = () => setHobbies([]);
 
-  const cvPreviewRef = useRef<HTMLDivElement>(null);
+  const cvPreviewRef = useRef(null)
 
   const handleDownloadPdf = async () => {
     const element = cvPreviewRef.current
@@ -113,7 +114,7 @@ export default function Home() {
         const pdfHeight = (canvas.height * pdfWidth) / canvas.width 
 
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save(`cv_nataal.pdf`)
+        pdf.save(`cv.pdf`)
 
         const modal = document.getElementById('my_modal_3') as HTMLDialogElement
         if(modal){
@@ -142,8 +143,8 @@ export default function Home() {
           <div className="w-1/3 h-full p-10 bg-base-200 scrollable no-scrollbar ">
             <div className="mb-4 flex justify-between items-center">
               <h1 className="text-2xl font-bold italic">
-                CVBuilder
-                <span className="text-primary">BYNAATAL</span>
+                CV
+                <span className="text-primary">Builder</span>
 
               </h1>
 
@@ -262,7 +263,7 @@ export default function Home() {
               <p className="ml-4 text-sm text-primary">{zoom}%</p>
             </div>
 
-            {/* <select
+            <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
               className="select select-bordered fixed z-[9999] select-sm top-12 right-5"
@@ -272,7 +273,7 @@ export default function Home() {
                   {themeName}
                 </option>
               ))}
-            </select> */}
+            </select>
 
             <div
               className="flex justify-center items-center"
@@ -283,6 +284,7 @@ export default function Home() {
               <CVPreview
                 personalDetails={personalDetails}
                 file={file}
+                theme={theme}
                 experiences={experiences}
                 educations={educations}
                 languages={languages}
@@ -319,6 +321,7 @@ export default function Home() {
                   <CVPreview
                     personalDetails={personalDetails}
                     file={file}
+                    theme={theme}
                     experiences={experiences}
                     educations={educations}
                     languages={languages}

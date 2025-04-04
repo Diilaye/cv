@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`antialiased`}
+        className={`antialiased`} data-theme="sunset"
       >
         {children}
       </body>

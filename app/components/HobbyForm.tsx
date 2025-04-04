@@ -1,4 +1,4 @@
-import { Hobby } from '@/type';
+import { Hobby } from '../data/donnes';
 import { Plus } from 'lucide-react';
 import React, { useState } from 'react'
 

@@ -1,4 +1,4 @@
-import { PersonalDetails } from '@/type';
+import { PersonalDetails } from '../data/donnes';
 import React from 'react'
 
 type Props = {

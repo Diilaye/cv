@@ -7,6 +7,7 @@ import { BriefcaseBusiness, GraduationCap, Mail, MapPinCheckInside, Phone, Star 
 type Props = {
     personalDetails: PersonalDetails;
     file: File | null;
+    theme: string;
     experiences: Experience[];
     educations: Education[];
     languages: Language[];
@@ -56,9 +57,9 @@ const getStarRating = (proficiency: string) => {
 }
 
 const CVPreview = forwardRef<HTMLDivElement, Omit<Props, 'ref'>>(
-    ({ personalDetails, file, experiences, educations, languages, skills, hobbies, download }, ref) => {
+    ({ personalDetails, file, experiences, educations, languages, skills, hobbies, download , theme }, ref) => {
         return (
-            <div ref={ref} className={` flex p-16 w-[950px] h-[1200px] shadow-lg ${download ? 'mb-0' : ''}`}>
+            <div ref={ref} className={` flex p-16 w-[950px] h-[1200px] shadow-lg ${download ? 'mb-0' : ''}`} data-theme={theme}>
 
             <div className='flex flex-col w-1/3'>
                 <div className='mt-2 h-60 rounded-full border-8 bg-slate-100 overflow-hidden border-primary hobbies'>

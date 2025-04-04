@@ -1,4 +1,4 @@
-import { Education } from '@/type';
+import { Education } from '../data/donnes';
 import { Plus } from 'lucide-react';
 import React, { useState } from 'react'
 

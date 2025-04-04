@@ -1,4 +1,4 @@
-import { Language } from '@/type';
+import { Language } from '../data/donnes';
 import { Plus } from 'lucide-react';
 import React, { useState } from 'react'
 
